@@ -1,7 +1,12 @@
 library(DBI)
 library(yaml)
 library(dplyr)
-library(RPostgreSQL)
+driver = tolower(g_config$db$driver)
+if(driver=="postgres" || driver=="postgresql"){
+  library(RPostgreSQL)
+} else if(driver=="oracle"){
+  library(ROracle)
+}
 
 generateLevel2ADT_Occurrence <- function () {
   #detach("package:plyr", unload=TRUE) # otherwise dplyr's group by , summarize etc do not work
