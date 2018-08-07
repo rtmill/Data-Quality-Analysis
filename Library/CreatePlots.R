@@ -8,7 +8,7 @@
 #reportTotalCount<-function(df_table)
 #{
  # assuming the first field is the primary key field
- #return(length(unique(df_table[,1])))
+ #return(nrow(unique(df_table[,1])))
 
 #}
 
@@ -18,10 +18,10 @@ describeIdentifier<-function(table_df, field_name)
     select_(field_name) %>%
     unique()
   
-  total_distinct_values <- length(table_df)
-  if(total_distinct_values == 1)
-      if(is.na(unique(df_table)))
+  total_distinct_values <- nrow(table_df) # Should be nrow(), not length(), as length gives the number of columns
+  if(total_distinct_values == 1 && is.na(table_df[1,])) # Consolidated nested if-statements, took out extra unique() call
         return (0);
+  
 	return (total_distinct_values);
 }
 
@@ -600,7 +600,7 @@ describeDateField<-function(df_table, table_name,field_name,big_data_flag)
       # creating a table out of it so that we can use in the barplot function
       dfTab<-table(new_vector)
       ordered_data<-df_table[order(-df_table[,2]), ]
-      total_values <- length(unique(df_table$Var1))
+      total_values <- nrow(unique(df_table$Var1))
       png(paste(normalize_directory_path( g_config$reporting$site_directory),get_image_name(table_name,field_name),sep=""))
       # not using ggplot here as it is very expensive for a large number of values
       #vector_table <- as.vector(as.matrix(df_table$Freq))
@@ -849,7 +849,7 @@ describeTimeField<-function(df_table, table_name,field_name,big_data_flag)
 
             ordered_data<-df_table[order(-df_table[,2]), ]
 
-            total_values<- length(unique(df_table$Var1))
+            total_values<- nrow(unique(df_table$Var1))
 
             png(paste(normalize_directory_path( g_config$reporting$site_directory),get_image_name(table_name,paste(field_name,"_time",sep="")),sep=""))
             # not using ggplot here as it is very expensive for a large number of values
@@ -1080,7 +1080,7 @@ describeForeignKeyIdentifiers<-function(df_table, table_name, field_name,big_dat
 
         ordered_data<-df_table[order(-df_table[,2]), ]
 
-        total_values<- length(unique(df_table$Var1))
+        total_values<- nrow(unique(df_table$Var1))
 
         png(paste(normalize_directory_path( g_config$reporting$site_directory),get_image_name(table_name,field_name),sep=""))
         # not using ggplot here as it is very expensive for a large number of values
@@ -1126,7 +1126,7 @@ describeForeignKeyIdentifiers<-function(table_df, table_name, field_name,big_dat
 
     if(nrow(table_df)>0){
 
-      total_values<- nrow(table_df)
+      total_values <- nrow(table_df)
       
       png(paste(normalize_directory_path( g_config$reporting$site_directory),get_image_name(table_name,field_name),sep=""))
       # not using ggplot here as it is very expensive for a large number of values
