@@ -1,0 +1,14 @@
+{
+    "src_name" : "odbc",
+    "src_args" : {
+        "Driver"   : "SQL Server",
+	      "Server"   : "",
+		    "port"     : 1433,
+		    "Database" : "",
+		    "uid"      : "",
+		    "pwd"      : ""
+		   
+      
+    }
+}
+
