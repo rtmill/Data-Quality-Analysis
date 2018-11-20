@@ -17,7 +17,7 @@ applyCheck.UnexDiff <- function(theObject, table_list, field_list, current_total
 {
   table_name<-table_list[1]
   prev_total_count<-get_previous_cycle_total_count( g_config$reporting$site, table_name)
-  if(is.na(prev_total_count)==TRUE) ## if previously this table was not generated
+  if(is.null(prev_total_count)==TRUE) ## if previously this table was not generated
     return(c())
   
   percentage_diff<-get_percentage_diff(prev_total_count, current_total_count)

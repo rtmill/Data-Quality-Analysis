@@ -174,16 +174,20 @@ convert_to_comma_list<-function(df_visit)
 get_previous_cycle_total_count<-function(site_name, table_name)
 {
    flog.info(getwd())
+  
   df_total_counts<-read.csv(g_total_counts_path, header = TRUE, sep = ",", quote = "\"",
                           dec = ".", fill = TRUE, comment.char = "")
 
   column_index<-which(colnames(df_total_counts)==table_name)
+  if(length(column_index) == 0){
+    return(NULL)
+  }
   for(row_index in 1:nrow(df_total_counts))
   {
     if(df_total_counts[row_index,1]==site_name)
       return(df_total_counts[row_index, column_index])
   }
- return(0);
+ return(NULL);
 }
 get_previous_cycle_total_fact_type_count<-function(site_name, col_name)
 {
