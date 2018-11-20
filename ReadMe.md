@@ -31,6 +31,7 @@ R version 3.1.x or above, 64-bit ([Comprehensive R Archive Network](http://cran.
 install.packages(c("DBI","yaml","ggplot2","RJDBC","devtools","futile.logger","plyr","dplyr","dbplyr","lubridate"))
 
 install.packages("RPostgres")
+install.packages("odbc")
 library(devtools)
 install_github("ohdsi/SqlRender")
 install_github("ohdsi/DatabaseConnector")
@@ -45,7 +46,9 @@ install_github("baileych/ohdsi-argos")
   * rlang: 0.1.4
   * stringr: 1.2
 * The `RPostgres` package is _not_ required if PostgreSQL is not the target database type
+* The `odbc` package is _not_ required if SQL Server is not the target database type
 * For Oracle users, the [`ROracle`](https://cran.r-project.org/web/packages/ROracle/index.html) package should be installed
+
 
 For troubleshooting with `install_github("ohdsi/SqlRender")`, please see [here](https://github.com/OHDSI/SqlRender/issues/28). 
 
