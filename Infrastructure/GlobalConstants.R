@@ -5,8 +5,11 @@ g_catalog_folder_path <<- paste(getwd(), "/Data/DQACatalog/", sep = "")
 
 g_config <<- yaml.load_file(g_config_path)
 
-g_total_counts_path <<- paste(getwd(),
-                              "/Data/PreviousDataSummary/total_counts.csv", sep= "")
+# Get site_directory from g_config
+rpt_path <- normalizePath(g_config$reporting$site_directory)
+
+g_total_counts_path <<- paste(rpt_path,
+                              "/data/total_counts.csv", sep= "")
 
 g_total_fact_type_counts_path <<- paste(getwd(),
                               "/Data/PreviousDataSummary/total_fact_type_counts.csv", sep= "")
